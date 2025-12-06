@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>INDRANIL SHYAMAL</title>
+
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --brand:#00f0ff;
+  --glass:rgba(255,255,255,0.08);
+}
+
+* { box-sizing:border-box; margin:0; padding:0; font-family:'Inter',sans-serif; }
+
+body {
+  background: radial-gradient(circle at top, #020617, #000);
+  color:#fff;
+  overflow-x:hidden;
+}
+
+/* CANVAS */
+canvas {
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+/* GLASS */
+.glass {
+  background:var(--glass);
+  backdrop-filter: blur(18px);
+  border:1px solid rgba(255,255,255,.15);
+  border-radius:20px;
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+
+/* HEADER */
+header {
+  min-height:100svh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+}
+
+h1 {
+  font-size:clamp(2.3rem,6vw,4.6rem);
+  letter-spacing:-1px;
+}
+
+.glow {
+  color:var(--brand);
+  text-shadow:0 0 18px var(--brand);
+}
+
+/* BUTTON */
+.cta {
+  margin-top:24px;
+  padding:14px 32px;
+  border:none;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--brand),#0066ff);
+  font-weight:600;
+  cursor:pointer;
+}
+
+/* SOCIAL ICONS */
+.socials {
+  margin-top:24px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+.socials a {
+  width:46px;
+  height:46px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.18);
+  color:var(--brand);
+  font-size:20px;
+  transition:.35s;
+}
+
+.socials a:hover {
+  background:var(--brand);
+  color:#000;
+  transform:translateY(-4px);
+}
+
+/* SECTIONS */
+section {
+  max-width:1100px;
+  margin:80px auto;
+  padding:28px;
+}
+
+section h2 {
+  font-size:clamp(1.8rem,5vw,2.5rem);
+}
+
+/* CARDS */
+.cards {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:18px;
+  margin-top:26px;
+}
+
+.card {
+  padding:22px;
+  text-align:center;
+  transition:.35s;
+}
+
+@media (hover:hover) {
+  .card:hover {
+    transform:scale(1.06);
+  }
+}
+
+/* FORM */
+input,textarea {
+  width:100%;
+  padding:14px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+  margin-bottom:12px;
+  font-size:15px;
+}
+
+/* FOOTER */
+footer {
+  text-align:center;
+  padding:30px;
+  opacity:.6;
+  font-size:14px;
+}
+
+/* MOBILE FINE-TUNE */
+@media (max-width:600px){
+  section { margin:60px 14px; }
+  canvas { opacity:.6; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="three"></canvas>
+<div id="tsparticles"></div>
+
+<header class="glass">
+<div>
+  <h1>INDRANIL <span class="glow">SHYAMAL</span></h1>
+  <p style="opacity:.7;margin-top:8px;font-size:.95rem">
+    B.C.A STUDENT • INTERN AT EDUZEN • MIDNAPORE COLLEGE (AUTONOMOUS)
+  </p>
+
+  <button class="cta" onclick="window.open('bio.html')">Download Resume</button>
+
+  <div class="socials">
+    <a href="https://github.com/indranilshyamall-ops" target="_blank"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/indranil-shyamal-54073738a" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.facebook.com/share/1ATPLLJTMm/" target="_blank"><i class="fab fa-facebook"></i></a>
+    <a href="https://x.com/IndranilSh71357" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://www.instagram.com/indranil_shyamal" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+</header>
+
+<section class="glass">
+<h2 class="glow">About Me</h2>
+<p style="opacity:.82;margin-top:16px">
+INDRANILSHYAMAL
+</p>
+</section>
+
+<section class="glass">
+<h2 class="glow">Skills</h2>
+<div class="cards">
+  <div class="card glass">C Language</div>
+  <div class="card glass">HTML</div>
+  <div class="card glass">Python</div>
+  <div class="card glass">Computer Architecture</div>
+</div>
+</section>
+
+<section class="glass">
+<h2 class="glow">Contact</h2>
+<form action="mailto:indranilshyamall@gmail.com" method="POST" enctype="text/plain">
+  <input type="email" name="Email" placeholder="Your Email" required>
+  <textarea name="Message" rows="4" placeholder="Message" required></textarea>
+  <button class="cta">Send Message</button>
+</form>
+</section>
+
+<footer>© 2025 INDRANIL SHYAMAL</footer>
+
+<script>
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,.1,1000);
+
+const renderer=new THREE.WebGLRenderer({
+canvas:document.getElementById('three'),
+alpha:true,antialias:true
+});
+renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+renderer.setSize(innerWidth,innerHeight);
+
+const mesh=new THREE.Mesh(
+  new THREE.TorusKnotGeometry(9,2.8,90,14),
+  new THREE.MeshStandardMaterial({color:0x00f0ff,metalness:.7,roughness:.2})
+);
+scene.add(mesh);
+scene.add(new THREE.AmbientLight(0xffffff,.4));
+
+const light=new THREE.PointLight(0xffffff,1.2);
+light.position.set(30,30,30);
+scene.add(light);
+
+camera.position.z=36;
+
+function animate(){
+  requestAnimationFrame(animate);
+  mesh.rotation.x+=0.002;
+  mesh.rotation.y+=0.002;
+  renderer.render(scene,camera);
+}
+animate();
+
+tsParticles.load("tsparticles",{
+particles:{
+number:{value:window.innerWidth<600?30:60},
+color:{value:"#00f0ff"},
+size:{value:2},
+move:{speed:.5}
+}
+});
+</script>
+
+</body>
+</html>

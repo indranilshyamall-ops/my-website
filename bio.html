@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INDRANIL | Resume</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --brand:#00f0ff;
+  --bg:#020617;
+  --glass:rgba(255,255,255,0.08);
+  --text:#ffffff;
+}
+.light{
+  --bg:#f5f7fa;
+  --glass:rgba(0,0,0,0.06);
+  --text:#000000;
+}
+*{box-sizing:border-box;font-family:Inter}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+}
+.resume{
+  max-width:900px;
+  margin:50px auto;
+  padding:40px;
+  background:var(--glass);
+  backdrop-filter:blur(18px);
+  border-radius:26px;
+  box-shadow:0 40px 120px rgba(0,0,0,.5);
+}
+header{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  border-bottom:1px solid rgba(255,255,255,.2);
+  padding-bottom:20px;
+}
+.photo{
+  width:140px;
+  height:140px;
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+  animation:float 4s ease-in-out infinite;
+}
+.photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+h1{
+  margin:0;
+  font-size:2.5rem;
+}
+.glow{
+  color:var(--brand);
+  text-shadow:0 0 12px var(--brand);
+}
+.role{opacity:.7}
+.section{margin-top:35px}
+.section h2{
+  font-size:1.2rem;
+  color:var(--brand);
+  margin-bottom:12px;
+}
+.card{
+  background:rgba(255,255,255,.05);
+  padding:18px;
+  border-radius:16px;
+  margin-bottom:12px;
+}
+.skill{
+  margin-bottom:10px;
+}
+.bar{
+  height:8px;
+  border-radius:10px;
+  background:rgba(255,255,255,.15);
+  overflow:hidden;
+}
+.fill{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,var(--brand),#0066ff);
+  animation:load 2s forwards;
+}
+@keyframes load{
+  to{width:var(--level)}
+}
+.controls{
+  display:flex;
+  gap:10px;
+  margin-top:20px;
+}
+button{
+  padding:10px 18px;
+  border:none;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+}
+.primary{
+  background:linear-gradient(135deg,var(--brand),#0066ff);
+}
+.secondary{
+  background:rgba(255,255,255,.1);
+  color:var(--text);
+}
+footer{
+  margin-top:30px;
+  display:flex;
+  justify-content:space-between;
+  opacity:.7;
+}
+@media(max-width:600px){
+  header{flex-direction:column;align-items:flex-start}
+  .photo{width:110px;height:110px}
+}
+</style>
+</head>
+
+<body>
+
+<div id="root" class="resume">
+
+<header>
+  <div class="photo">
+    <img src="c:\Users\satpa\AppData\Local\Packages\5319275A.WhatsAppDesktop_cv1g1gvanyjgm\TempState\CB57CDB7CC459DC6FBBC33F91485B5E2\WhatsApp Image 2025-12-06 at 14.20.00_a21bb9ff.jpg" alt="Profile Photo">
+  </div>
+  <div>
+    <h1>INDRANIL <span class="glow">SHYAMAL</span></h1>
+    <p class="B.C.A STUDENT • INTERN AT EDUZEN • MIDNAPORE COLLEGE (AUTONOMOUS)</p>
+    <p>📧 indranilshyamall@gmail.com<br>📍 Medinipur,West Bengal, India</p>
+
+    <div class="controls">
+      <button class="primary" onclick="downloadPDF()">Download PDF</button>
+      <button class="secondary" onclick="toggleTheme()">Dark / Light</button>
+    </div>
+  </div>
+</header>
+
+<section class="section">
+<h2>Professional Summary</h2>
+<div class="card">
+
+</div>
+</section>
+
+<section class="section">
+<h2>Technical Skills</h2>
+
+<div class="skill">C Language
+  <div class="bar"><div class="fill" style="--level:91%"></div></div>
+</div>
+
+<div class="skill">Python
+  <div class="bar"><div class="fill" style="--level:45%"></div></div>
+</div>
+
+<div class="skill">HTML
+  <div class="bar"><div class="fill" style="--level:55%"></div></div>
+</div>
+
+</section>
+
+<section class="section">
+<h2>Projects</h2>
+<div class="card">
+<b>C Programming</b><br>
+Matrix, Linear Search and many More Coding
+</div>
+<div class="card">
+<b>Python Projects</b><br>
+Data will be add soon..
+</div>
+</section>
+
+<section class="section">
+<h2>Education</h2>
+<div class="card">
+Bachalor Of Computer Application(B.C.A) - Midnapore College(Autonomous) -- Current Student
+</div>
+</section>
+
+<footer>
+<span>Available for Internship / Freelance</span>
+<span>Portfolio Ready ✅</span>
+</footer>
+
+</div>
+
+<script>
+function toggleTheme(){
+  document.body.classList.toggle('light');
+}
+function downloadPDF(){
+  window.print();
+}
+</script>
+
+</body>
+</html>
