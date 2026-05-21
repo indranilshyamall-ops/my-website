@@ -1,213 +1,418 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>INDRANIL | Resume</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Indranil Shyamal | Resume</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- External Typography & Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --brand:#00f0ff;
-  --bg:#020617;
-  --glass:rgba(255,255,255,0.08);
-  --text:#ffffff;
+:root {
+  --primary-gold: #d4af37;
+  --gold-gradient: linear-gradient(135deg, #f3e5ab, #d4af37);
+  --bg-deep: #0a0c10;
+  --bg-card: rgba(22, 26, 34, 0.6);
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --border-subtle: rgba(212, 175, 55, 0.15);
+  --text-pure: #ffffff;
+  --text-body: #9ca3af;
+  --text-muted: #6b7280;
 }
-.light{
-  --bg:#f5f7fa;
-  --glass:rgba(0,0,0,0.06);
-  --text:#000000;
+
+/* Light Theme Variable Overrides */
+.light {
+  --bg-deep: #f4f6f9;
+  --bg-card: #ffffff;
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(212, 175, 55, 0.4);
+  --text-pure: #111827;
+  --text-body: #4b5563;
+  --text-muted: #9ca3af;
 }
-*{box-sizing:border-box;font-family:Inter}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-.resume{
-  max-width:900px;
-  margin:50px auto;
-  padding:40px;
-  background:var(--glass);
-  backdrop-filter:blur(18px);
-  border-radius:26px;
-  box-shadow:0 40px 120px rgba(0,0,0,.5);
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-pure);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  padding: 60px 24px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-header{
-  display:flex;
-  gap:30px;
-  align-items:center;
-  border-bottom:1px solid rgba(255,255,255,.2);
-  padding-bottom:20px;
+
+.resume-container {
+  max-width: 850px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 12px;
+  padding: 50px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
 }
-.photo{
-  width:140px;
-  height:140px;
-  border-radius:20px;
-  overflow:hidden;
-  box-shadow:0 20px 60px rgba(0,0,0,.6);
-  animation:float 4s ease-in-out infinite;
+
+/* HEADER STRUCTURE */
+header {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 36px;
 }
-.photo img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+
+.photo-frame {
+  width: 130px;
+  height: 130px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
 }
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+
+.photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
-h1{
-  margin:0;
-  font-size:2.5rem;
+
+.header-meta h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin-bottom: 6px;
 }
-.glow{
-  color:var(--brand);
-  text-shadow:0 0 12px var(--brand);
+
+.gold-accent {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
 }
-.role{opacity:.7}
-.section{margin-top:35px}
-.section h2{
-  font-size:1.2rem;
-  color:var(--brand);
-  margin-bottom:12px;
+
+.tagline {
+  color: var(--primary-gold);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
 }
-.card{
-  background:rgba(255,255,255,.05);
-  padding:18px;
-  border-radius:16px;
-  margin-bottom:12px;
+
+.contact-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  color: var(--text-body);
+  font-size: 0.9rem;
 }
-.skill{
-  margin-bottom:10px;
+
+.contact-info span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-.bar{
-  height:8px;
-  border-radius:10px;
-  background:rgba(255,255,255,.15);
-  overflow:hidden;
+
+.contact-info i {
+  color: var(--primary-gold);
 }
-.fill{
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--brand),#0066ff);
-  animation:load 2s forwards;
+
+/* INTERACTIVE CONTROLS */
+.controls-panel {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
 }
-@keyframes load{
-  to{width:var(--level)}
+
+.btn {
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
-.controls{
-  display:flex;
-  gap:10px;
-  margin-top:20px;
+
+.btn-gold {
+  background: var(--gold-gradient);
+  color: #000;
 }
-button{
-  padding:10px 18px;
-  border:none;
-  border-radius:999px;
-  cursor:pointer;
-  font-weight:600;
+
+.btn-gold:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(214, 175, 55, 0.2);
 }
-.primary{
-  background:linear-gradient(135deg,var(--brand),#0066ff);
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--border-glass);
+  color: var(--text-pure);
 }
-.secondary{
-  background:rgba(255,255,255,.1);
-  color:var(--text);
+
+.btn-outline:hover {
+  background: var(--border-glass);
 }
-footer{
-  margin-top:30px;
-  display:flex;
-  justify-content:space-between;
-  opacity:.7;
+
+/* RESUME SECTIONS */
+.section-block {
+  margin-top: 40px;
 }
-@media(max-width:600px){
-  header{flex-direction:column;align-items:flex-start}
-  .photo{width:110px;height:110px}
+
+.section-block h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--primary-gold);
+  border-bottom: 1px solid var(--border-glass);
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+}
+
+.card-item {
+  background: rgba(255, 255, 255, 0.01);
+  border-left: 2px solid var(--primary-gold);
+  padding: 20px;
+  margin-bottom: 16px;
+  border-radius: 0 8px 8px 0;
+}
+
+.card-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.card-title-row h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.card-date {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.card-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.card-desc {
+  color: var(--text-body);
+  font-size: 0.95rem;
+}
+
+/* SKILLS MATRIX */
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.skill-row {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.skill-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.skill-bar {
+  height: 4px;
+  background: var(--border-glass);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-fill {
+  height: 100%;
+  background: var(--gold-gradient);
+  width: 0;
+  animation: loadProgress 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes loadProgress {
+  to { width: var(--level); }
+}
+
+/* REFINED FOOTER */
+footer {
+  margin-top: 50px;
+  border-top: 1px solid var(--border-glass);
+  padding-top: 24px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* PRINT OPTIMIZATION LAYOUT */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    padding: 0 !important;
+  }
+  .resume-container {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+  }
+  .controls-panel {
+    display: none !important;
+  }
+  .skill-bar {
+    background: #e5e7eb !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .skill-fill {
+    background: #d4af37 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* MOBILE RESPONSIVENESS */
+@media (max-width: 650px) {
+  body { padding: 24px 16px; }
+  .resume-container { padding: 28px 20px; }
+  header { flex-direction: column; text-align: center; gap: 20px; }
+  .contact-info { justify-content: center; }
+  .controls-panel { justify-content: center; }
+  .skills-container { grid-template-columns: 1fr; gap: 16px; }
+  .card-title-row { flex-direction: column; gap: 4px; }
 }
 </style>
 </head>
-
 <body>
 
-<div id="root" class="resume">
-
-<header>
-  <div class="photo">
-    <img src="https://zippy-sapphire-ayop5pmrew.edgeone.app/WhatsApp%20Image%202026-02-06%20at%2011.22.20%20PM.jpeg" alt="Profile Photo">
-  </div>
-  <div>
-    <h1>INDRANIL <span class="glow">SHYAMAL</span></h1>
-    <p class="B.C.A STUDENT • INTERN AT EDUZEN • MIDNAPORE COLLEGE (AUTONOMOUS)</p>
-    <p>📧 indranilshyamall@gmail.com<br>📍 Medinipur,West Bengal, India</p>
-
-    <div class="controls">
-      <button class="primary" onclick="downloadPDF()">Download PDF</button>
-      <button class="secondary" onclick="toggleTheme()">Dark / Light</button>
+<div class="resume-container">
+ 
+  <!-- PROFILE HEADER -->
+  <header>
+    <div class="photo-frame">
+      <img src="https://zippy-sapphire-ayop5pmrew.edgeone.app/WhatsApp%20Image%202026-02-06%20at%2011.22.20%20PM.jpeg" alt="Indranil Shyamal Portrait">
     </div>
-  </div>
-</header>
+    <div class="header-meta">
+      <p class="tagline">B.C.A Student &bull; Technical Intern</p>
+      <h1>Indranil <span class="gold-accent">Shyamal</span></h1>
+     
+      <div class="contact-info">
+        <span><i class="fa-regular fa-envelope"></i> indranilshyamall@gmail.com</span>
+        <span><i class="fa-solid fa-location-dot"></i> Medinipur, West Bengal, India</span>
+      </div>
 
-<section class="section">
-<h2>Professional Summary</h2>
-<div class="card">
+      <div class="controls-panel">
+        <button class="btn btn-gold" onclick="downloadPDF()"><i class="fa-solid fa-print"></i> Save / Print PDF</button>
+        <button class="btn btn-outline" onclick="toggleTheme()"><i class="fa-solid fa-circle-half-stroke"></i> Interface Mode</button>
+      </div>
+    </div>
+  </header>
 
-</div>
-</section>
+  <!-- SUMMARY -->
+  <section class="section-block">
+    <h2>Professional Summary</h2>
+    <div class="card-item">
+      <p class="card-desc">
+        Detail-oriented Bachelor of Computer Applications student at Midnapore College with practical, hands-on experience gained through an active industry internship at Eduzen. Adept at analyzing core computer hardware architectures and developing foundational desktop and script solutions using programming frameworks.
+      </p>
+    </div>
+  </section>
 
-<section class="section">
-<h2>Technical Skills</h2>
+  <!-- SKILLS MATRIX -->
+  <section class="section-block">
+    <h2>Technical Capabilities</h2>
+    <div class="skills-container">
+      <div class="skill-row">
+        <div class="skill-meta"><span>C Programming Logic</span><span>91%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--level: 91%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-meta"><span>Web Layout Architecture (HTML5 / CSS3)</span><span>55%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--level: 55%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-meta"><span>Python Scripting Foundations</span><span>45%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--level: 45%"></div></div>
+      </div>
+      <div class="skill-row">
+        <div class="skill-meta"><span>Computer Systems &amp; Hardware Architecture</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-fill" style="--level: 80%"></div></div>
+      </div>
+    </div>
+  </section>
 
-<div class="skill">C Language
-  <div class="bar"><div class="fill" style="--level:91%"></div></div>
-</div>
+  <!-- PROJECTS -->
+  <section class="section-block">
+    <h2>Academic &amp; Practical Projects</h2>
+    <div class="card-item">
+      <div class="card-title-row">
+        <h3>Structural Data Algorithms</h3>
+        <span class="card-date">C Language Platform</span>
+      </div>
+      <p class="card-desc">Engineered custom logic configurations executing complex matrix math computations, multidimensional linear queries, and structured sorting algorithms to optimize operational runtime execution metrics.</p>
+    </div>
+    <div class="card-item">
+      <div class="card-title-row">
+        <h3>System Scripting Utilities</h3>
+        <span class="card-date">Python Environment</span>
+      </div>
+      <p class="card-desc">Developing automated procedural tasks and algorithmic computational utilities structured to streamline lower-level system file processing modules.</p>
+    </div>
+  </section>
 
-<div class="skill">Python
-  <div class="bar"><div class="fill" style="--level:45%"></div></div>
-</div>
+  <!-- EDUCATION -->
+  <section class="section-block">
+    <h2>Education Matrix</h2>
+    <div class="card-item">
+      <div class="card-title-row">
+        <h3>Bachelor of Computer Applications (B.C.A.)</h3>
+        <span class="card-date">Current Enrolment</span>
+      </div>
+      <div class="card-subtitle">Midnapore College (Autonomous)</div>
+      <p class="card-desc">Focusing on modern computing practices, programmatic data structures, software lifecycle engineering models, database operations, and system circuitry design principles.</p>
+    </div>
+  </section>
 
-<div class="skill">HTML
-  <div class="bar"><div class="fill" style="--level:55%"></div></div>
-</div>
-
-</section>
-
-<section class="section">
-<h2>Projects</h2>
-<div class="card">
-<b>C Programming</b><br>
-Matrix, Linear Search and many More Coding
-</div>
-<div class="card">
-<b>Python Projects</b><br>
-Data will be add soon..
-</div>
-</section>
-
-<section class="section">
-<h2>Education</h2>
-<div class="card">
-Bachalor Of Computer Application(B.C.A) - Midnapore College(Autonomous) -- Current Student
-</div>
-</section>
-
-<footer>
-<span>Available for Internship / Freelance</span>
-<span>Portfolio Ready ✅</span>
-</footer>
+  <!-- FOOTER MODULE -->
+  <footer>
+    <span>Active Security Clearance Available</span>
+    <span>Portfolio Reference Secure &bull; 2026</span>
+  </footer>
 
 </div>
 
 <script>
-function toggleTheme(){
+function toggleTheme() {
   document.body.classList.toggle('light');
 }
-function downloadPDF(){
+
+function downloadPDF() {
   window.print();
 }
 </script>
 
 </body>
 </html>
-
