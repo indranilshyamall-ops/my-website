@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Indranil Shyamal | Achievements & Certificates</title>
+
+<!-- External Resources -->
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary-gold: #d4af37;
+  --gold-gradient: linear-gradient(135deg, #f3e5ab, #d4af37);
+  --bg-deep: #0a0c10;
+  --bg-card: rgba(22, 26, 34, 0.6);
+  --border-subtle: rgba(212, 175, 55, 0.15);
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --text-pure: #ffffff;
+  --text-body: #9ca3af;
+  --text-muted: #6b7280;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-pure);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* BACKGROUND ENGINE LAYER CONTROLS */
+canvas#canvas-three {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#tsparticles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* STICKY GLASSMOPHISM NAVIGATION HEADER */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-pure);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--primary-gold);
+}
+
+/* SECTION STRUCTURE HERO HEADER */
+.hero-wrapper {
+  padding: 160px 24px 60px;
+  text-align: center;
+}
+
+.hero-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-subtitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary-gold);
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+.gold-accent {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
+}
+
+/* CONTENT CONTAINER BLOCKS */
+.main-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-block {
+  padding: 60px 0;
+  border-top: 1px solid var(--border-glass);
+}
+
+.grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1.8fr;
+  gap: 64px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.3rem;
+  font-weight: 500;
+  color: var(--text-pure);
+}
+
+.section-title span {
+  color: var(--primary-gold);
+}
+
+/* CERTIFICATE CREDENTIAL CARDS MATRIX */
+.credential-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.luxury-cert-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.luxury-cert-card:hover {
+  border-color: var(--border-subtle);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.cert-thumbnail-wrapper {
+  position: relative;
+  aspect-ratio: 16 / 11;
+  background: #11141c;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+.cert-thumbnail-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.luxury-cert-card:hover .cert-thumbnail-wrapper img {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.cert-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 12, 16, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cert-thumbnail-wrapper:hover .cert-overlay {
+  opacity: 1;
+}
+
+.cert-overlay i {
+  color: var(--primary-gold);
+  font-size: 1.5rem;
+  background: rgba(10, 12, 16, 0.8);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+}
+
+.cert-info-pane {
+  padding: 24px;
+}
+
+.cert-issuer {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--primary-gold);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.cert-title {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.cert-desc {
+  font-size: 0.9rem;
+  color: var(--text-body);
+  font-weight: 300;
+}
+
+/* HISTORICAL ACHIEVEMENTS ROADMAP */
+.timeline-block {
+  border-left: 1px solid var(--border-glass);
+  padding-left: 28px;
+  position: relative;
+  margin-bottom: 32px;
+}
+
+.timeline-block::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 8px;
+  width: 7px;
+  height: 7px;
+  background-color: var(--primary-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--primary-gold);
+}
+
+.timeline-meta {
+  font-size: 0.85rem;
+  color: var(--primary-gold);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.timeline-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.timeline-body {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+/* INTERACTIVE LIGHTBOX EXPANSION MODAL SYSTEM */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(5, 6, 8, 0.95);
+  backdrop-filter: blur(10px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: zoom-out;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 85vh;
+  border-radius: 6px;
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+  transform: scale(0.95);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lightbox-modal.active .lightbox-content {
+  transform: scale(1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  color: var(--text-pure);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+
+.lightbox-close:hover {
+  color: var(--primary-gold);
+}
+
+/* PREMIUM FOOTER STRUCTURE */
+.premium-footer {
+  background: #06080b;
+  border-top: 1px solid var(--border-glass);
+  padding: 80px 24px 40px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.footer-brand h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  color: var(--text-body);
+  max-width: 320px;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.footer-nav-col h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary-gold);
+  margin-bottom: 20px;
+}
+
+.footer-nav-col ul {
+  list-style: none;
+}
+
+.footer-nav-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-nav-col ul li a {
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.25s ease;
+}
+
+.footer-nav-col ul li a:hover {
+  color: var(--primary-gold);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-glass);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.25s ease;
+}
+
+.footer-socials a:hover {
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+.footer-copyright {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* RESPONSIVE LAYOUT MATRIX (MOBILE ADAPTIONS) */
+@media (max-width: 1024px) {
+  .grid-two-col {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .section-block {
+    padding: 40px 0;
+  }
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-copyright {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  canvas#canvas-three {
+    opacity: 0.25;
+  }
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas-three"></canvas>
+<div id="tsparticles"></div>
+
+<!-- STICKY HEADER INTERFACE -->
+<header class="nav-header">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">I.S</a>
+    <nav class="nav-links">
+      <a href="index.html">About</a>
+      <a href="bio.html">Resume</a>
+      <a href="#" class="active">Achievements</a>
+    </nav>
+  </div>
+</header>
+
+<!-- MAIN HERO HEADER BLOCK -->
+<section class="hero-wrapper">
+  <div class="hero-inner">
+    <p class="hero-subtitle">Credentials &amp; Milestones</p>
+    <h1>Honors &amp; <span class="gold-accent">Achievements</span></h1>
+  </div>
+</section>
+
+<!-- LAYOUT MAIN FIELD -->
+<main class="main-layout">
+
+  <!-- CERTIFICATES WITH ACTIVE LIVE PREVIEW LIGHTBOX -->
+  <section class="section-block grid-two-col">
+    <div class="left-col">
+      <h2 class="section-title">Verified <span>Certificates</span></h2>
+    </div>
+    <div class="right-col">
+      <div class="credential-showcase">
+       
+        <!-- CERTIFICATE ELEMENT 1 -->
+        <div class="luxury-cert-card">
+          <div class="cert-thumbnail-wrapper" onclick="openLightbox('https://images.unsplash.com/photo-1589330694653-ded6df53f6ee?auto=format&fit=crop&q=80&w=1000')">
+            <img src="https://mail.google.com/mail/u/0?ui=2&ik=9ad171c928&attid=0.1&permmsgid=msg-f:1865816624658096679&th=19e4b655a8c3a227&view=fimg&fur=ip&permmsgid=msg-f:1865816624658096679&sz=s0-l75-ft&attbid=ANGjdJ9-BZVleNMbTQD3T3iGDgWTI2q2roz6zLZM8ShMIC6Mgwolesx4q65ErSVLUuLjYoVzfc6S8bJkB27ac3VrUT7qFN_bFLRuuG5AneugYBD3HvnZ2329Zi1phHo&disp=emb&realattid=ii_19e4b6511de8565817b1&zw" alt="Eduzen Technical Internship Certificate">
+            <div class="cert-overlay">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+          </div>
+          <div class="cert-info-pane">
+            <div class="cert-issuer">IBMs</div>
+            <h3 class="cert-title">Applied Artificial Inteligence</h3>
+            <p class="cert-desc">Validates active participation in real-world technical assignments, algorithmic configuration logic, and responsive systems interface development routines.</p>
+          </div>
+        </div>
+
+        <!-- CERTIFICATE ELEMENT 2 -->
+        <div class="luxury-cert-card">
+          <div class="cert-thumbnail-wrapper" onclick="openLightbox('https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=1000')">
+            <img src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?auto=format&fit=crop&q=80&w=600" alt="C Programming Logic Milestone Validation">
+            <div class="cert-overlay">
+              <i class="fa-solid fa-expand"></i>
+            </div>
+          </div>
+          <div class="cert-info-pane">
+            <div class="cert-issuer">Midnapore College</div>
+            <h3 class="cert-title">Advanced C Language Competency</h3>
+            <p class="cert-desc">Acknowledges elite-tier marks and implementation execution speed during computing matrix sorting, pointer logic tracking, and data array evaluations.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMIC MILESTONES TIMELINE -->
+  <section class="section-block grid-two-col">
+    <div class="left-col">
+      <h2 class="section-title">Key <span>Milestones</span></h2>
+    </div>
+    <div class="right-col">
+     
+      <div class="timeline-block">
+        <div class="timeline-meta">Eduzen Frameworks &bull; Active Operations</div>
+        <h3 class="timeline-title">Industry Technical Internship Appointee</h3>
+        <p class="timeline-body">Selected into the technical training engine at Eduzen, parsing standard theoretical frameworks into architectural layout systems and web processing models.</p>
+      </div>
+
+      <div class="timeline-block">
+        <div class="timeline-meta">Midnapore College Academic Track</div>
+        <h3 class="timeline-title">B.C.A Systems Laboratory Distinction</h3>
+        <p class="timeline-body">Consistently secured elite metrics in computational laboratory execution, engineering clean multidimensional logic structures under rigorous system parameters.</p>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- INTERACTIVE ZOOM LIGHTBOX CONTAINER OVERLAY -->
+<div class="lightbox-modal" id="lightboxModal" onclick="closeLightbox()">
+  <span class="lightbox-close">&times;</span>
+  <img class="lightbox-content" id="lightboxImg" alt="Expanded Verification Certificate Preview">
+</div>
+
+<!-- GLOBAL EXHAUSTIVE FOOTER MODULE -->
+<footer class="premium-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>INDRANIL SHYAMAL</h2>
+      <p>Bridging academic computing frameworks with modern practical systems interface design.</p>
+    </div>
+    <div class="footer-nav-col">
+      <h4>System Hub</h4>
+      <ul>
+        <li><a href="index.html">Profile Context</a></li>
+        <li><a href="bio.html">Resume Credentials</a></li>
+        <li><a href="ach.html">Achievements Hub</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav-col">
+      <h4>Networking Matrix</h4>
+      <div class="footer-socials">
+        <a href="https://github.com/indranilshyamall-ops" target="_blank" aria-label="Github Reference"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/indranil-shyamal-54073738a" target="_blank" aria-label="LinkedIn Connect"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/share/1ATPLLJTMm/" target="_blank" aria-label="Facebook Profile"><i class="fab fa-facebook"></i></a>
+        <a href="https://x.com/IndranilSh71357" target="_blank" aria-label="Twitter Grid"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/indranil_shyamal" target="_blank" aria-label="Instagram Stream"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <p>&copy; 2026 Indranil Shyamal. Premium Portfolio Infrastructure.</p>
+    <p>Designed with Luxury Minimalist Standards.</p>
+  </div>
+</footer>
+
+<script>
+// Interactive Preview Zoom Engine Logic (Lightbox)
+const modal = document.getElementById("lightboxModal");
+const modalImg = document.getElementById("lightboxImg");
+
+function openLightbox(imageSrc) {
+  modal.style.display = "flex";
+  // Micro-timeout prevents layout snapping and transitions scaling nicely
+  setTimeout(() => {
+    modal.classList.add("active");
+  }, 10);
+  modalImg.src = imageSrc;
+}
+
+function closeLightbox() {
+  modal.classList.remove("active");
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 300);
+}
+
+// Background Ambient 3D Scene Initialization Configuration
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.getElementById('canvas-three'),
+  alpha: true,
+  antialias: true
+});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(window.innerWidth, window.innerHeight);
+
+// Create a gold wireframe knot geometry matching architecture theme
+const geometry = new THREE.TorusKnotGeometry(10, 2.4, 100, 12);
+const material = new THREE.MeshStandardMaterial({
+  color: 0xc5a059,
+  metalness: 0.9,
+  roughness: 0.1,
+  wireframe: true
+});
+const mesh = new THREE.Mesh(geometry, material);
+scene.add(mesh);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+const light = new THREE.PointLight(0xffffff, 1.2);
+light.position.set(25, 25, 25);
+scene.add(light);
+
+camera.position.z = 35;
+
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+  mesh.rotation.x += 0.0012;
+  mesh.rotation.y += 0.0018;
+  renderer.render(scene, camera);
+}
+animate();
+
+// Ambient Micro-Particles Layer Integration
+tsParticles.load("tsparticles", {
+  particles: {
+    number: { value: window.innerWidth < 768 ? 20 : 45 },
+    color: { value: "#d4af37" },
+    size: { value: 1.2 },
+    move: { speed: 0.25, direction: "none", random: true },
+    opacity: { value: 0.15 }
+  }
+});
+</script>
+
+</body>
+</html>
+
