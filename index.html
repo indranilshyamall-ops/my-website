@@ -2,255 +2,625 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="google-site-verification" content="rqOYa65UlL1HGCahPyXMZdsMT7Wz9wp8DAd0-sObSfA" />
-<title>INDRANIL SHYAMAL</title>
+<title>Indranil Shyamal | Professional Portfolio</title>
 
+<!-- External Resources -->
 <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
-<script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --brand:#00f0ff;
-  --glass:rgba(255,255,255,0.08);
+  --primary-gold: #d4af37;
+  --gold-gradient: linear-gradient(135deg, #f3e5ab, #d4af37);
+  --bg-deep: #0a0c10;
+  --bg-card: rgba(22, 26, 34, 0.6);
+  --border-subtle: rgba(212, 175, 55, 0.15);
+  --border-glass: rgba(255, 255, 255, 0.05);
+  --text-pure: #ffffff;
+  --text-body: #9ca3af;
+  --text-muted: #6b7280;
 }
 
-* { box-sizing:border-box; margin:0; padding:0; font-family:'Inter',sans-serif; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  background: radial-gradient(circle at top, #020617, #000);
-  color:#fff;
-  overflow-x:hidden;
+  background-color: var(--bg-deep);
+  color: var(--text-pure);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.7;
+  overflow-x: hidden;
 }
 
-/* CANVAS */
-canvas {
-  position:fixed;
-  inset:0;
-  z-index:-1;
+/* BACKGROUND LAYER CONTROL */
+canvas#canvas-three {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
 }
 
-/* GLASS */
-.glass {
-  background:var(--glass);
-  backdrop-filter: blur(18px);
-  border:1px solid rgba(255,255,255,.15);
-  border-radius:20px;
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
+#tsparticles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
-/* HEADER */
-header {
-  min-height:100svh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:24px;
+/* NAVIGATION HEADER SYSTEM */
+.nav-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(10, 12, 16, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--text-pure);
+  text-decoration: none;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+}
+
+.nav-links a {
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--primary-gold);
+}
+
+/* PREMIUM HERO SECTION */
+.hero-wrapper {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 60px;
+  text-align: center;
+}
+
+.hero-inner {
+  max-width: 800px;
+}
+
+.hero-subtitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary-gold);
+  margin-bottom: 20px;
 }
 
 h1 {
-  font-size:clamp(2.3rem,6vw,4.6rem);
-  letter-spacing:-1px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 7vw, 4.8rem);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
 }
 
-.glow {
-  color:var(--brand);
-  text-shadow:0 0 18px var(--brand);
+.gold-accent {
+  background: var(--gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-style: italic;
 }
 
-/* BUTTON */
-.cta {
-  margin-top:24px;
-  padding:14px 32px;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg,var(--brand),#0066ff);
-  font-weight:600;
-  cursor:pointer;
+.hero-lead {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-body);
+  max-width: 600px;
+  margin: 0 auto 36px;
+  font-weight: 300;
 }
 
-/* SOCIAL ICONS */
-.socials {
-  margin-top:24px;
-  display:flex;
-  justify-content:center;
-  gap:18px;
-  flex-wrap:wrap;
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 36px;
+  background: var(--gold-gradient);
+  color: #000;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
-.socials a {
-  width:46px;
-  height:46px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.18);
-  color:var(--brand);
-  font-size:20px;
-  transition:.35s;
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(214, 175, 55, 0.2);
 }
 
-.socials a:hover {
-  background:var(--brand);
-  color:#000;
-  transform:translateY(-4px);
+/* SECTION STRUCTURES */
+.main-layout {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
-/* SECTIONS */
-section {
-  max-width:1100px;
-  margin:80px auto;
-  padding:28px;
+.section-block {
+  padding: 100px 0;
+  border-top: 1px solid var(--border-glass);
 }
 
-section h2 {
-  font-size:clamp(1.8rem,5vw,2.5rem);
+.grid-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 64px;
 }
 
-/* CARDS */
-.cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-  gap:18px;
-  margin-top:26px;
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--text-pure);
+  position: sticky;
+  top: 120px;
 }
 
-.card {
-  padding:22px;
-  text-align:center;
-  transition:.35s;
+.section-title span {
+  color: var(--primary-gold);
 }
 
-@media (hover:hover) {
-  .card:hover {
-    transform:scale(1.06);
+.paragraph-text {
+  color: var(--text-body);
+  font-size: 1.05rem;
+  margin-bottom: 24px;
+  font-weight: 300;
+}
+
+/* SKILLS CARDS */
+.skills-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.skill-luxury-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  padding: 32px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.skill-luxury-card:hover {
+  border-color: var(--border-subtle);
+  transform: translateY(-4px);
+  background: rgba(22, 26, 34, 0.9);
+}
+
+.skill-luxury-card i {
+  font-size: 1.6rem;
+  color: var(--primary-gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.skill-luxury-card h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* MODERN MINIMAL INPUT CONTROLS */
+.luxury-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.form-group-full {
+  grid-column: span 2;
+}
+
+.luxury-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--text-muted);
+  padding: 16px 0;
+  color: var(--text-pure);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.luxury-input:focus {
+  border-color: var(--primary-gold);
+}
+
+textarea.luxury-input {
+  resize: none;
+}
+
+.btn-submit {
+  grid-column: span 2;
+  justify-self: start;
+  background: transparent;
+  border: 1px solid var(--primary-gold);
+  color: var(--primary-gold);
+  padding: 14px 40px;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+  background: var(--gold-gradient);
+  color: #000;
+  border-color: transparent;
+}
+
+/* PREMIUM FOOTER DESIGN */
+.premium-footer {
+  background: #06080b;
+  border-top: 1px solid var(--border-glass);
+  padding: 80px 24px 40px;
+  margin-top: 60px;
+}
+
+.footer-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 60px;
+}
+
+.footer-brand h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  color: var(--text-body);
+  max-width: 320px;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.footer-nav-col h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--primary-gold);
+  margin-bottom: 20px;
+}
+
+.footer-nav-col ul {
+  list-style: none;
+}
+
+.footer-nav-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-nav-col ul li a {
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.25s ease;
+}
+
+.footer-nav-col ul li a:hover {
+  color: var(--primary-gold);
+}
+
+.footer-socials {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-socials a {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-glass);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-body);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.25s ease;
+}
+
+.footer-socials a:hover {
+  border-color: var(--primary-gold);
+  color: var(--primary-gold);
+  transform: translateY(-2px);
+}
+
+.footer-copyright {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* RESPONSIVE LAYOUT (MOBILE FRIENDLY) */
+@media (max-width: 1024px) {
+  .grid-two-col {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .section-title {
+    position: relative;
+    top: 0;
+    margin-bottom: 12px;
+  }
+  .section-block {
+    padding: 60px 0;
+  }
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* FORM */
-input,textarea {
-  width:100%;
-  padding:14px;
-  border-radius:10px;
-  border:none;
-  outline:none;
-  margin-bottom:12px;
-  font-size:15px;
-}
-
-/* FOOTER */
-footer {
-  text-align:center;
-  padding:30px;
-  opacity:.6;
-  font-size:14px;
-}
-
-/* MOBILE FINE-TUNE */
-@media (max-width:600px){
-  section { margin:60px 14px; }
-  canvas { opacity:.6; }
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* Keeps simple aesthetic on mobile header profiles */
+  }
+  .hero-wrapper {
+    min-height: 80vh;
+  }
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .footer-copyright {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  canvas#canvas-three {
+    opacity: 0.25;
+  }
 }
 </style>
 </head>
-
 <body>
 
-<canvas id="three"></canvas>
+<canvas id="canvas-three"></canvas>
 <div id="tsparticles"></div>
 
-<header class="glass">
-<div>
-  <h1>INDRANIL <span class="glow">SHYAMAL</span></h1>
-  <p style="opacity:.7;margin-top:8px;font-size:.95rem">
-    B.C.A STUDENT • INTERN AT EDUZEN • MIDNAPORE COLLEGE (AUTONOMOUS)
-  </p>
-
-  <button class="cta" onclick="window.open('bio.html')">Download Resume</button>
-
-  <div class="socials">
-    <a href="https://github.com/indranilshyamall-ops" target="_blank"><i class="fab fa-github"></i></a>
-    <a href="https://www.linkedin.com/in/indranil-shyamal-54073738a" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="https://www.facebook.com/share/1ATPLLJTMm/" target="_blank"><i class="fab fa-facebook"></i></a>
-    <a href="https://x.com/IndranilSh71357" target="_blank"><i class="fab fa-x-twitter"></i></a>
-    <a href="https://www.instagram.com/indranil_shyamal" target="_blank"><i class="fab fa-instagram"></i></a>
+<!-- NAVIGATION HEADER -->
+<header class="nav-header">
+  <div class="nav-container">
+    <a href="#" class="nav-logo">I.S</a>
+    <nav class="nav-links">
+      <a href="#about">About</a>
+      <a href="ach.html">Achivements</a>
+      <a href="#contact">Contact</a>
+    </nav>
   </div>
-</div>
 </header>
 
-<section class="glass">
-<h2 class="glow">About Me</h2>
-<p style="opacity:.82;margin-top:16px">
-INDRANILSHYAMAL
-</p>
+<!-- HERO AREA -->
+<section class="hero-wrapper">
+  <div class="hero-inner">
+    <p class="hero-subtitle">B.C.A Student &amp; Technical Intern</p>
+    <h1>Indranil <span class="gold-accent">Shyamal</span></h1>
+    <p class="hero-lead">Midnapore College (Autonomous) student pairing computing theory with active interface deployments at Eduzen.</p>
+    <a href="bio.html" target="_blank" class="btn-primary">
+      View Executive Resume <i class="fa-solid fa-arrow-right-long"></i>
+    </a>
+  </div>
 </section>
 
-<section class="glass">
-<h2 class="glow">Skills</h2>
-<div class="cards">
-  <div class="card glass">C Language</div>
-  <div class="card glass">HTML</div>
-  <div class="card glass">Python</div>
-  <div class="card glass">Computer Architecture</div>
-</div>
-</section>
+<!-- MAIN LAYOUT WRAPPER -->
+<main class="main-layout">
 
-<section class="glass">
-<h2 class="glow">Contact</h2>
-<form action="mailto:indranilshyamall@gmail.com" method="POST" enctype="text/plain">
-  <input type="email" name="Email" placeholder="Your Email" required>
-  <textarea name="Message" rows="4" placeholder="Message" required></textarea>
-  <button class="cta">Send Message</button>
-</form>
-</section>
+  <!-- ABOUT -->
+  <section id="about" class="section-block grid-two-col">
+    <div class="left-col">
+      <h2 class="section-title">The <span>Profile</span></h2>
+    </div>
+    <div class="right-col">
+      <p class="paragraph-text">
+        I am currently structuring my core engineering foundations through a Bachelor of Computer Applications framework at Midnapore College, while simultaneously executing practical system tasks as a technical intern at Eduzen.
+      </p>
+      <p class="paragraph-text">
+        My academic focus rests heavily within scalable programmatic algorithms and system physical layers. I look to create elegant, clean structures that resolve deep computational mechanics smoothly.
+      </p>
+    </div>
+  </section>
 
-<footer>© 2025 INDRANIL SHYAMAL</footer>
+  <!-- SKILLS / CAPABILITIES -->
+  <section id="skills" class="section-block grid-two-col">
+    <div class="left-col">
+      <h2 class="section-title">Core <span>Focus</span></h2>
+    </div>
+    <div class="right-col">
+      <div class="skills-showcase">
+        <div class="skill-luxury-card">
+          <i class="fa-solid fa-cube"></i>
+          <h3>C Language</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Algorithmic foundations, structural memory models, logic processing.</p>
+        </div>
+        <div class="skill-luxury-card">
+          <i class="fa-solid fa-terminal"></i>
+          <h3>Python</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Script architecture, data flow automation, scalable utilities.</p>
+        </div>
+        <div class="skill-luxury-card">
+          <i class="fa-solid fa-window-maximize"></i>
+          <h3>Web Layouts</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Semantic structures, highly responsive grid layouts, styling layers.</p>
+        </div>
+        <div class="skill-luxury-card">
+          <i class="fa-solid fa-microchip"></i>
+          <h3>Architecture</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Hardware level tracking, memory mapping logic, instruction sets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-block grid-two-col">
+    <div class="left-col">
+      <h2 class="section-title">Contact <span>Portal</span></h2>
+    </div>
+    <div class="right-col">
+      <form action="mailto:indranilshyamall@gmail.com" method="POST" enctype="text/plain" class="luxury-form">
+        <div>
+          <input type="text" name="Name" class="luxury-input" placeholder="Your Name" required>
+        </div>
+        <div>
+          <input type="email" name="Email" class="luxury-input" placeholder="Your Email Address" required>
+        </div>
+        <div class="form-group-full">
+          <textarea name="Message" rows="4" class="luxury-input" placeholder="Message Matrix Detail..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Initialize Inquiry</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- PREMIUM FOOTER -->
+<footer class="premium-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>INDRANIL SHYAMAL</h2>
+      <p>Bridging academic computing frameworks with modern practical systems interface design.</p>
+    </div>
+    <div class="footer-nav-col">
+      <h4>System Hub</h4>
+      <ul>
+        <li><a href="#about">Profile Context</a></li>
+        <li><a href="#skills">Capabilities</a></li>
+        <li><a href="#contact">Contact Access</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav-col">
+      <h4>Networking Matrix</h4>
+      <div class="footer-socials">
+        <a href="https://github.com/indranilshyamall-ops" target="_blank" aria-label="Github"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/indranil-shyamal-54073738a" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/share/1ATPLLJTMm/" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://x.com/IndranilSh71357" target="_blank" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://www.instagram.com/indranil_shyamal" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">
+    <p>&copy; 2026 Indranil Shyamal. All Rights Reserved.</p>
+    <p><strong>Version 2.0</strong></p>
+  </div>
+</footer>
 
 <script>
-const scene=new THREE.Scene();
-const camera=new THREE.PerspectiveCamera(75,innerWidth/innerHeight,.1,1000);
+// Ambient 3D Engine Initialization
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
-const renderer=new THREE.WebGLRenderer({
-canvas:document.getElementById('three'),
-alpha:true,antialias:true
+const renderer = new THREE.WebGLRenderer({
+  canvas: document.getElementById('canvas-three'),
+  alpha: true,
+  antialias: true
 });
-renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
-renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+renderer.setSize(window.innerWidth, window.innerHeight);
 
-const mesh=new THREE.Mesh(
-  new THREE.TorusKnotGeometry(9,2.8,90,14),
-  new THREE.MeshStandardMaterial({color:0x00f0ff,metalness:.7,roughness:.2})
-);
+// Creating a gold-shaded wireframe mesh
+const geometry = new THREE.TorusKnotGeometry(10, 2.4, 100, 12);
+const material = new THREE.MeshStandardMaterial({
+  color: 0xc5a059,
+  metalness: 0.9,
+  roughness: 0.1,
+  wireframe: true
+});
+const mesh = new THREE.Mesh(geometry, material);
 scene.add(mesh);
-scene.add(new THREE.AmbientLight(0xffffff,.4));
 
-const light=new THREE.PointLight(0xffffff,1.2);
-light.position.set(30,30,30);
+scene.add(new THREE.AmbientLight(0xffffff, 0.3));
+const light = new THREE.PointLight(0xffffff, 1.2);
+light.position.set(25, 25, 25);
 scene.add(light);
 
-camera.position.z=36;
+camera.position.z = 35;
 
-function animate(){
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
+function animate() {
   requestAnimationFrame(animate);
-  mesh.rotation.x+=0.002;
-  mesh.rotation.y+=0.002;
-  renderer.render(scene,camera);
+  mesh.rotation.x += 0.0015;
+  mesh.rotation.y += 0.002;
+  renderer.render(scene, camera);
 }
 animate();
 
-tsParticles.load("tsparticles",{
-particles:{
-number:{value:window.innerWidth<600?30:60},
-color:{value:"#00f0ff"},
-size:{value:2},
-move:{speed:.5}
-}
+// Ambient Micro Particles Setup
+tsParticles.load("tsparticles", {
+  particles: {
+    number: { value: window.innerWidth < 768 ? 20 : 45 },
+    color: { value: "#d4af37" },
+    size: { value: 1.2 },
+    move: { speed: 0.25, direction: "none", random: true },
+    opacity: { value: 0.15 }
+  }
 });
 </script>
 
