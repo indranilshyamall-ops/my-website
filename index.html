@@ -514,24 +514,54 @@ textarea.luxury-input {
 
   <!-- CONTACT -->
   <section id="contact" class="section-block grid-two-col">
-    <div class="left-col">
-      <h2 class="section-title">Contact <span>Portal</span></h2>
-    </div>
-    <div class="right-col">
-      <form action="mailto:indranilshyamall@gmail.com" method="POST" enctype="text/plain" class="luxury-form">
-        <div>
-          <input type="text" name="Name" class="luxury-input" placeholder="Your Name" required>
-        </div>
-        <div>
-          <input type="email" name="Email" class="luxury-input" placeholder="Your Email Address" required>
-        </div>
-        <div class="form-group-full">
-          <textarea name="Message" rows="4" class="luxury-input" placeholder="Message Matrix Detail..." required></textarea>
-        </div>
-        <button type="submit" class="btn-submit">Initialize Inquiry</button>
-      </form>
-    </div>
-  </section>
+  <div class="left-col">
+    <h2 class="section-title">Contact <span>Portal</span></h2>
+  </div>
+
+  <div class="right-col">
+    <form class="luxury-form" onsubmit="sendWhatsApp(); return false;">
+      
+      <div>
+        <input type="text" id="name" class="luxury-input"
+               placeholder="Your Name" required>
+      </div>
+
+      <div>
+        <input type="email" id="email" class="luxury-input"
+               placeholder="Your Email Address" required>
+      </div>
+
+      <div class="form-group-full">
+        <textarea id="message" rows="4" class="luxury-input"
+                  placeholder="Message Matrix Detail..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        Send on WhatsApp
+      </button>
+    </form>
+  </div>
+</section>
+
+<script>
+function sendWhatsApp() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let message = document.getElementById("message").value;
+
+    // Replace with your WhatsApp number
+    let phone = "916294027797"; // Example: 91 + your number
+
+    let text =
+        "Name: " + name + "%0A" +
+        "Email: " + email + "%0A" +
+        "Message: " + message;
+
+    let url = "https://wa.me/" + phone + "?text=" + text;
+
+    window.open(url, "_blank");
+}
+</script>
 
 </main>
 
@@ -622,17 +652,7 @@ tsParticles.load("tsparticles", {
     opacity: { value: 0.15 }
   }
 });
-  setInterval(() => {
-    if (
-        window.outerWidth - window.innerWidth > 160 ||
-        window.outerHeight - window.innerHeight > 160
-    ) {
-        document.body.innerHTML =
-        "<h1 style='text-align:center;color:red;margin-top:100px'>Developer Tools Detected</h1>";
-    }
-}, 1000);
 </script>
 
 </body>
 </html>
-
